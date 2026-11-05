@@ -10,6 +10,8 @@ Plain HTML, CSS and JavaScript. Nothing to install. All photos and videos are in
 ```
 index.html              The whole home page
 404.html                "Page not found" page
+privacy.html            Privacy Policy
+terms.html              Terms & Conditions
 manifest.webmanifest    App icon / name for phones
 robots.txt              Lets Google crawl everything
 build.js                Optional build step (adds full web address for SEO, makes sitemap.xml)
@@ -18,6 +20,7 @@ vercel.json             Vercel settings (runs build.js automatically)
 .github/workflows/      Optional GitHub Pages deploy
 assets/css/style.css    Styles
 assets/js/main.js       Loader, video popup, slider, gallery, enquiry form
+assets/js/legal.js      Mobile menu for the Privacy and Terms pages
 assets/img/             Photos (WebP) + logo
 assets/video/           15 videos (MP4) + poster frames (JPG)
 assets/icons/           Favicon, app icons, social share image

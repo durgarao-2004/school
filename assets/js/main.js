@@ -96,10 +96,12 @@
   var dow=new Date().getDay();
   $$('.day').forEach(function(c){if(+c.dataset.day===dow){c.classList.add('today');var t=d.createElement('span');t.className='tag';t.textContent='Today';c.appendChild(t)}});
 
-  /* copy phone */
+  /* copy phone and email */
   var toast=$('#toast'),tt;function say(m){toast.textContent=m;toast.hidden=false;clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},2200)}
-  $('#copyPhone').addEventListener('click',function(){function sel(){var r=d.createRange();r.selectNodeContents($('#phoneText'));var s=getSelection();s.removeAllRanges();s.addRange(r);say('Number selected')}
-    try{navigator.clipboard.writeText('+91 94413 68036').then(function(){say('Number copied')},sel)}catch(e){sel()}});
+  function copyBtn(btn,textEl,value,label){$(btn).addEventListener('click',function(){function sel(){var r=d.createRange();r.selectNodeContents($(textEl));var s=getSelection();s.removeAllRanges();s.addRange(r);say(label+' selected')}
+    try{navigator.clipboard.writeText(value).then(function(){say(label+' copied')},sel)}catch(e){sel()}})}
+  copyBtn('#copyPhone','#phoneText','+91 94413 68036','Number');
+  copyBtn('#copyEmail','#emailText','sarathschool2001@gmail.com','Email');
 
   /* enquiry -> WhatsApp */
   var f=$('#enqForm');

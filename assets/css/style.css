@@ -334,6 +334,15 @@ figure{margin:0}
 .foot .about{margin-top:14px;max-width:36ch;font-size:.93rem}
 .foot-base{margin-top:44px;border-top:1px solid rgba(255,255,255,.12);padding-block:20px;text-align:center;font-weight:700;font-size:.86rem;letter-spacing:.06em;text-transform:uppercase;color:#fff}
 @media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid>div:first-child{grid-column:1/-1}}
+.foot li{overflow-wrap:anywhere}
+.foot-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;margin-bottom:8px}
+
+/* ---------- privacy + terms pages ---------- */
+.legal{max-width:832px;margin:0 auto;padding:clamp(40px,6vw,72px) max(16px,env(safe-area-inset-right,0px)) clamp(48px,7vw,88px) max(16px,env(safe-area-inset-left,0px))}
+.legal .updated{color:var(--muted);font-size:.92rem;font-weight:600;margin-top:12px;margin-bottom:24px}
+.legal h2{font-weight:800;font-size:1.2rem;line-height:1.3;color:var(--navy);margin-top:34px}
+.legal p{margin-top:10px;overflow-wrap:anywhere}
+.legal p a{color:var(--navy);font-weight:700}
 
 /* ---------- floating ---------- */
 .side-enq{position:fixed;right:env(safe-area-inset-right,0px);top:50%;z-index:70;transform:translateY(-50%);writing-mode:vertical-rl;background:var(--yellow);color:var(--navy-d);border:0;font-weight:900;font-size:.92rem;letter-spacing:.12em;text-transform:uppercase;padding:22px 14px;cursor:pointer;box-shadow:-6px 0 20px rgba(14,42,107,.2)}

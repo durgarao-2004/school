@@ -41,8 +41,15 @@ if (U) {
   let h = fs.readFileSync(file, 'utf8');
   const abs = (p) => U + '/' + p.replace(/^\.\//, '');
   // Social preview + canonical
-  h = h.replace(/(<meta (?:property="og:image"|name="twitter:image") content=")([^"]+)(")/g, (m, a, p, b) => a + abs(p) + b);
-  h = h.replace('<meta property="og:type"', `<link rel="canonical" href="${U}/">\n<meta property="og:url" content="${U}/">\n<meta property="og:type"`);
+  const addSeoLinks = (html, pageUrl) => html
+    .replace(/(<meta (?:property="og:image"|name="twitter:image") content=")([^"]+)(")/g, (m, a, p, b) => a + abs(p) + b)
+    .replace('<meta property="og:type"', `<link rel="canonical" href="${pageUrl}">\n<meta property="og:url" content="${pageUrl}">\n<meta property="og:type"`);
+  h = addSeoLinks(h, `${U}/`);
+  const LEGAL_PAGES = ['privacy.html', 'terms.html'];
+  for (const page of LEGAL_PAGES) {
+    const pageFile = path.join(OUT, page);
+    fs.writeFileSync(pageFile, addSeoLinks(fs.readFileSync(pageFile, 'utf8'), `${U}/${page}`));
+  }
   // Structured data: make every relative url absolute
   h = h.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/, (m, json) => {
     const data = JSON.parse(json);
@@ -83,6 +90,12 @@ if (U) {
     </video:video>`).join('');
   const imageXml = [...new Set(imgs)].map((i) => `
     <image:image><image:loc>${abs(i)}</image:loc></image:image>`).join('');
+  const legalXml = LEGAL_PAGES.map((page) => `
+  <url>
+    <loc>${U}/${page}</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>`).join('');
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
@@ -90,7 +103,7 @@ if (U) {
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>${imageXml}${videoXml}
-  </url>
+  </url>${legalXml}
 </urlset>
 `);
   fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${U}/sitemap.xml\n`);
