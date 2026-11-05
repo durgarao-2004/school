@@ -1,0 +1,9 @@
+# Netlify: builds automatically. Netlify provides the site address in $URL.
+[build]
+  command = "node build.js"
+  publish = "dist"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

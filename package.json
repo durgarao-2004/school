@@ -1,0 +1,8 @@
+{
+  "name": "sarath-english-medium-school",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for Sarath English Medium School (Sarath Public School), Pedagantyada, Gajuwaka, Visakhapatnam",
+  "scripts": { "build": "node build.js" },
+  "engines": { "node": ">=18" }
+}
